@@ -1,5 +1,5 @@
 {
-  "name": "atrocore/BE-module",
+  "name": "bitzertech/atro-bemodule",
   "require": {
     "atrocore/core": "~2.0.0"
   },
