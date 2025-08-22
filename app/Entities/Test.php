@@ -7,9 +7,9 @@ namespace BEModule\Entities;
 use Atro\Core\Templates\Entities\Base;
 
 /**
- * Test Entity
+ * CtrlColdPlate Entity
  */
-class Test extends Base
+class CtrlColdPlate extends Base
 {
 
 }

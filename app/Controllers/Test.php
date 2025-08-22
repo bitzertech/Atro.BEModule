@@ -7,9 +7,9 @@ namespace BEModule\Controllers;
 use Atro\Core\Templates\Controllers\Base;
 
 /**
- * Test Controller
+ * CtrlColdPlate Controller
  */
-class Test extends Base
+class CtrlColdPlate extends Base
 {
 
 }

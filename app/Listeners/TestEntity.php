@@ -6,7 +6,7 @@ use Atro\Listeners\AbstractListener;
 use Atro\Core\EventManager\Event;
 
 /**
- * Test Entity Listener
+ * CtrlColdPlate Entity Listener
  */
 class TestEntity extends AbstractListener
 {

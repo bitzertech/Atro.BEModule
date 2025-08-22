@@ -7,9 +7,9 @@ namespace BEModule\Repositories;
 use Atro\Core\Templates\Repositories\Base;
 
 /**
- * Test Repository
+ * CtrlColdPlate Repository
  */
-class Test extends Base
+class CtrlColdPlate extends Base
 {
 
 }

@@ -9,4 +9,4 @@ If you want to see **more complicated modules**, please have a look at these fre
 - https://github.com/atrocore/atropim
 
 ## Description
-This module just creates a new Entity "Test".
+This module just creates a new Entity "CtrlColdPlate".
