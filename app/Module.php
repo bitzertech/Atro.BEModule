@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace BEModule;
@@ -19,3 +18,4 @@ class Module extends AbstractModule
         return 9999;
     }
 }
+?>

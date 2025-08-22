@@ -1,74 +1,43 @@
 {
   "fields": {
-    "name": {
-      "type": "varchar",
-      "required": true,
-      "trim": true,
-      "isMultilang": true
-    },
-    "createdAt": {
-      "type": "datetime",
-      "readOnly": true
-    },
-    "modifiedAt": {
-      "type": "datetime",
-      "readOnly": true
-    },
-    "createdBy": {
-      "type": "link",
-      "readOnly": true,
-      "view": "views/fields/user"
-    },
-    "modifiedBy": {
-      "type": "link",
-      "readOnly": true,
-      "view": "views/fields/user"
-    },
-    "ownerUser": {
-      "type": "link",
-      "required": true,
-      "view": "views/fields/owner-user"
-    },
-    "assignedUser": {
-      "type": "link",
-      "required": true,
-      "view": "views/fields/assigned-user"
-    },
-    "teams": {
-      "type": "linkMultiple",
-      "view": "views/fields/teams"
-    }
-  },
-  "links": {
-    "createdBy": {
-      "type": "belongsTo",
-      "entity": "User"
-    },
-    "modifiedBy": {
-      "type": "belongsTo",
-      "entity": "User"
-    },
-    "ownerUser": {
-      "type": "belongsTo",
-      "entity": "User"
-    },
-    "assignedUser": {
-      "type": "belongsTo",
-      "entity": "User"
-    },
-    "teams": {
-      "type": "hasMany",
-      "entity": "Team",
-      "relationName": "EntityTeam",
-      "layoutRelationshipsDisabled": true
-    }
+    "CtrlColdPlateID": { "type": "varchar", "required": true, "unique": true, "maxLength": 255 },
+    "CtrlColdPlateName": { "type": "varchar", "required": true, "maxLength": 255 },
+    "Generation": { "type": "int" },
+    "ValveSetID": { "type": "int" },
+
+    "MinSensorValPress": { "type": "float" },
+    "MaxSensorValPress": { "type": "float" },
+    "IdealTemperature": { "type": "float" },
+
+    "StartFunction": { "type": "varchar", "maxLength": 255 },
+
+    "EEVProportionalGain": { "type": "float" },
+    "EEVIntegrationTime": { "type": "float" },
+    "EEVProportionalCoeff": { "type": "float" },
+    "EEVIntegrationCoeff": { "type": "float" },
+    "EEVMinIntegrationTime": { "type": "float" },
+    "EEVFeedForwardK": { "type": "int" },
+    "EEVValvePosMinPct": { "type": "int" },
+    "EEVValvePosMaxPct": { "type": "int" },
+    "EEVValvePosInitPct": { "type": "int" },
+
+    "EPVProportionalGain": { "type": "float" },
+    "EPVIntegrationTime": { "type": "float" },
+    "EPVProportionalCoeff": { "type": "float" },
+    "EPVIntegrationCoeff": { "type": "float" },
+    "EPVMinIntegrationTime": { "type": "float" },
+    "EPVValvePosMinPct": { "type": "int" },
+    "EPVValvePosMaxPct": { "type": "int" },
+    "EPVValvePosInitPct": { "type": "int" },
+
+    "isActive": { "type": "bool", "default": true }
   },
   "indexes": {
-    "name": {
-      "columns": [
-        "name",
-        "deleted"
-      ]
-    }
+    "idx_unique_ctrlcoldplateid": { "columns": ["CtrlColdPlateID"], "unique": true }
+  },
+  "collection": {
+    "textFilterFields": ["CtrlColdPlateID", "CtrlColdPlateName", "ValveSetID"],
+    "orderBy": "CtrlColdPlateName",
+    "order": "asc"
   }
 }
