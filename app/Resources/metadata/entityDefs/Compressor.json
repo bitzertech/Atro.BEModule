@@ -1,0 +1,15 @@
+{
+  "fields": {
+    "code": { "type": "varchar", "required": true, "unique": true },
+    "name": { "type": "varchar", "required": true },
+
+    "BestNumber": { "type": "int" },
+    "OrderKey": { "type": "int" },
+    "DefaultRef": { "type": "varchar", "maxLength": 30 },
+
+    "Legacy": { "type": "bool", "default": false }
+  },
+  "links": {},
+  "collection": {},
+  "indexes": {}
+}
