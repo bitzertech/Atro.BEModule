@@ -1,0 +1,36 @@
+{
+    "name": "atrocore/skeleton-pim-no-demo",
+    "description": "Skeleton for AtroPIM",
+    "homepage": "https://atropim.com",
+    "minimum-stability": "stable",
+    "require": {
+        "atrocore/core": ">=2.0.35",
+        "atrocore/pim": ">=1.14.26",
+        "atrocore/export": ">=1.9.14",
+        "atrocore/export-http": ">=1.7.4",
+        "atrocore/import": ">=1.9.20",
+        "atrocore/import-http": ">=1.5.3",
+        "atrocore/advanced-data-types": ">=1.2.5",
+        "bitzertech/atro-bemodule": "@dev"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packagist.atrocore.com/packages.json?id=47bd75dbef1f888dca648"
+        },
+        { 
+            "type": "path",
+            "url": "app/Atro/Modules/BEModule",
+            "options": { "symlink": true }
+        }
+
+    ],
+    "scripts": {
+        "post-update-cmd": "\\Atro\\Composer\\PostUpdate::postUpdate"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}

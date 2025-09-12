@@ -1,16 +1,20 @@
 {
+  "type": "Base",
+  "name": "Motor",
+  "label": "Motor",
+  "label_plural": "Motors",
   "fields": {
-    "code": { "type": "varchar", "required": true, "unique": true },
-    "name": { "type": "varchar", "required": true },
+    "code_and_connection": { "type": "varchar", "required": true },
+    "voltage": { "type": "int" },
+    "frequency": { "type": "int" },
+    "spkz": { "type": "int" },
+    "motor_code": { "type": "varchar", "required": true },
 
-    "bestNumber": { "type": "int" },
-    "defaultRef": { "type": "varchar", "maxLength": 30 },
+    "voltage_range": { "type": "varchar", "maxLength": 30 },
+    "connection": { "type": "varchar", "maxLength": 5 },
 
-    "legacy": { "type": "bool", "default": false },
-    "category": { "type": "bool" },
-    "series": { "type": "bool" },
-
-    "image":      { "type": "file" }
+    "voltage_frequence_factor": { "type": "float" },
+    "toggle_value": { "type": "int" }
   },
   "links": {},
   "collection": {},

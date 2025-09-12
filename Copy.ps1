@@ -13,7 +13,7 @@ $REMOTE_ROOT = "/home/$HOSTUSER/dev/Atro.BEModule"
 $REMOTE_SPEC = "${HOSTUSER}@${HOSTNAME}:${REMOTE_ROOT}/"
 
 # Sanity: kør fra modulets rod
-if (!(Test-Path "$LOCAL\app") -or !(Test-Path "$LOCAL\composer.json")) {
+if (!(Test-Path "$LOCAL\app") -or !(Test-Path "$LOCAL\atro_composer.json")) {
   throw "Kør Copy.ps1 fra modulets rod (skal indeholde 'app' og 'composer.json'). Aktuel: $LOCAL"
 }
 
@@ -22,7 +22,9 @@ ssh "$HOSTUSER@$HOSTNAME" "mkdir -p $REMOTE_ROOT && test -d $REMOTE_ROOT && echo
 
 # 2) Kopiér (uden quotes omkring remote-sti pga. Windows scp)
 scp -r "$LOCAL_UNIX/app"            $REMOTE_SPEC
+#scp -r "$LOCAL_UNIX/client"         $REMOTE_SPEC
 scp     "$LOCAL_UNIX/composer.json" $REMOTE_SPEC
+scp     "$LOCAL_UNIX/atro_composer.json" $REMOTE_SPEC
 
 # (valgfrit) apply.sh
 if (Test-Path "$LOCAL\apply.sh") {
