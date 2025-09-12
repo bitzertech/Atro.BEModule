@@ -1,0 +1,18 @@
+{
+  "fields": {
+    "code": { "type": "varchar", "required": true, "unique": true },
+    "name": { "type": "varchar", "required": true },
+
+    "bestNumber": { "type": "int" },
+    "defaultRef": { "type": "varchar", "maxLength": 30 },
+
+    "legacy": { "type": "bool", "default": false },
+    "category": { "type": "bool" },
+    "series": { "type": "bool" },
+
+    "image":      { "type": "file" }
+  },
+  "links": {},
+  "collection": {},
+  "indexes": {}
+}
