@@ -24,7 +24,8 @@ ssh "$HOSTUSER@$HOSTNAME" "mkdir -p $REMOTE_ROOT && test -d $REMOTE_ROOT && echo
 scp -r "$LOCAL_UNIX/app"            $REMOTE_SPEC
 #scp -r "$LOCAL_UNIX/client"         $REMOTE_SPEC
 scp     "$LOCAL_UNIX/composer.json" $REMOTE_SPEC
-scp     "$LOCAL_UNIX/atro_composer.json" $REMOTE_SPEC
+# Uncomment next line if you change the global composer config
+#scp     "$LOCAL_UNIX/atro_composer.json" $REMOTE_SPEC
 
 # (valgfrit) apply.sh
 if (Test-Path "$LOCAL\apply.sh") {
