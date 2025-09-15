@@ -1,0 +1,10 @@
+[
+  { "name": "name", "link": true, "width": "240" },
+  { "name": "code", "width": "140" },
+  { "name": "motor_code", "width": "140" },
+  { "name": "code_and_connection", "width": "220" },
+  { "name": "voltage", "align": "right", "width": "100" },
+  { "name": "frequency", "align": "right", "width": "110" },
+  { "name": "connection", "width": "110" },
+  { "name": "voltage_range", "width": "140" }
+]

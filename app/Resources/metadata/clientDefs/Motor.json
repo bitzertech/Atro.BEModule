@@ -1,4 +1,4 @@
 {
   "controller": "controllers/record",
-  "iconClass": "fas fa-square"
+  "iconClass": "fas fa-cog"
 }

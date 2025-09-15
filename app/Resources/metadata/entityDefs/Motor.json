@@ -4,6 +4,8 @@
   "label": "Motor",
   "label_plural": "Motors",
   "fields": {
+    "code": { "type": "varchar", "required": true, "unique": true, "maxLength": 190 },
+    "name": { "type": "varchar", "required": true, "maxLength": 190 },
     "code_and_connection": { "type": "varchar", "required": true },
     "voltage": { "type": "int" },
     "frequency": { "type": "int" },
