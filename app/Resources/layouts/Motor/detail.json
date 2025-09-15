@@ -1,15 +1,14 @@
-{
-  "panels": [
-    {
-      "name": "Overview",
-      "rows": [
+[
+  {
+    "label": "Overview",
+    "style": "default",
+    "rows": [
         [ { "name": "name" }, { "name": "code" } ],
         [ { "name": "motor_code" }, { "name": "code_and_connection" } ],
         [ { "name": "voltage" }, { "name": "frequency" } ],
         [ { "name": "connection" }, { "name": "voltage_range" } ],
         [ { "name": "spkz" }, { "name": "toggle_value" } ],
-        [ { "name": "voltage_frequence_factor" }, null ]
-      ]
-    }
-  ]
-}
+        [ { "name": "voltage_frequence_factor" } ]
+    ]
+  }
+]
