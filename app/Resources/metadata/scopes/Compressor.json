@@ -3,5 +3,5 @@
   "object": true,
   "module": "BEModule",
   "type": "BasePlus",
-  "collection": "Motor"
+  "collection": "Compressor"
 }

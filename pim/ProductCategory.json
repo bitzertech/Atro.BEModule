@@ -1,0 +1,11 @@
+{
+  "fields": {
+    "sorting": {
+      "type": "int"
+    },
+    "mainCategory": {
+      "type": "bool",
+      "default": false
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "type": "Base",
+  "name": "Compressor",
+  "label": "Compressor",
+  "label_plural": "Compressors",
+  "fields": {
+    "code": { "type": "varchar", "required": true, "unique": true, "maxLength": 190 },
+    "name": { "type": "varchar", "required": true, "maxLength": 190 },
+    "default_refrigerant": { "type": "varchar", "required": false, "label": "Default Refrigerant" },
+    "is_legacy": { "type": "bool", "default": false, "label": "Legacy" },
+    "best_number": { "type": "int", "required": true, "label": "Best Number" },
+    "motors": { "type": "linkMultiple" },
+    "category": { "type": "link" },
+
+    "createdAt": { "type": "datetime", "readOnly": true },
+    "modifiedAt": { "type": "datetime", "readOnly": true },
+    "createdBy": { "type": "link", "readOnly": true, "view": "views/fields/user" },
+    "modifiedBy": { "type": "link", "readOnly": true, "view": "views/fields/user" },
+    "sortOrder": { "type": "int", "default": null, "massUpdateDisabled": true, "filterDisabled": true, "exportDisabled": true }
+  },
+  "links": {
+    "createdBy": { "type": "belongsTo", "entity": "User" },
+    "modifiedBy": { "type": "belongsTo", "entity": "User" },
+
+    "motors": { "type": "manyMany", "entity": "Motor", "relationName": "compressorMotor"},
+    "category": { "type": "belongsTo", "entity": "Category" }
+  },
+  "collection": {
+    "textFilterFields": ["name", "code"],
+    "sortBy": "createdAt",
+    "asc": false
+  },
+  "indexes": {
+    "name": { "columns": ["name", "deleted"] },
+    "code": { "columns": ["code", "deleted"] }
+  }
+
+}

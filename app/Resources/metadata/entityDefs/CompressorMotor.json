@@ -1,0 +1,37 @@
+{
+  "fields": {
+    "motor": { "type": "link", "required": true },
+    "compressor": { "type": "link", "required": true },
+
+    "current": {
+      "type": "float",
+      "required": false,
+      "precision": 10,
+      "scale": 2
+    },
+
+    "createdAt": { "type": "datetime", "readOnly": true },
+    "modifiedAt": { "type": "datetime", "readOnly": true },
+    "createdBy": { "type": "link", "readOnly": true, "view": "views/fields/user" },
+    "modifiedBy": { "type": "link", "readOnly": true, "view": "views/fields/user" }
+  },
+  "links": {
+    "motor": { "type": "belongsTo", "entity": "Motor" },
+    "compressor": { "type": "belongsTo", "entity": "Compressor" },
+
+    "createdBy": { "type": "belongsTo", "entity": "User" },
+    "modifiedBy": { "type": "belongsTo", "entity": "User" }
+  },
+  "collection": {
+    "textFilterFields": ["motor", "compressor"],
+    "sortBy": "createdAt",
+    "asc": false
+  },
+  "indexes": {
+    "pairUnique": {
+      "unique": true,
+      "columns": ["motorId", "compressorId", "deleted"]
+    },
+    "createdAt": { "columns": ["createdAt"] }
+  }
+}

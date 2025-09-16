@@ -16,9 +16,29 @@
     "connection": { "type": "varchar", "maxLength": 5 },
 
     "voltage_frequence_factor": { "type": "float" },
-    "toggle_value": { "type": "int" }
+    "toggle_value": { "type": "int" },
+
+    "createdAt": { "type": "datetime", "readOnly": true },
+    "modifiedAt": { "type": "datetime", "readOnly": true },
+    "createdBy": { "type": "link", "readOnly": true, "view": "views/fields/user" },
+    "modifiedBy": { "type": "link", "readOnly": true, "view": "views/fields/user" }
   },
-  "links": {},
-  "collection": {},
-  "indexes": {}
-}
+  "links": {
+    "createdBy": { "type": "belongsTo", "entity": "User" },
+    "modifiedBy": { "type": "belongsTo", "entity": "User" },
+
+    "compressors": {
+      "type": "manyMany",
+      "entity": "Compressor",
+      "relationName": "compressorMotor"
+    }
+  },
+  "collection": {
+    "textFilterFields": ["name", "code"],
+    "sortBy": "createdAt",
+    "asc": false
+  },
+  "indexes": {
+    "name": { "columns": ["name", "deleted"] },
+    "code": { "columns": ["code", "deleted"] }
+  }}
