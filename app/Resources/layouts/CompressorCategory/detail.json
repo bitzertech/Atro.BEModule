@@ -1,0 +1,30 @@
+[
+  {
+    "label": "Details",
+    "style": "default",
+    "rows": [
+      [
+        {
+          "name": "isActive"
+        },
+        false
+      ],
+      [
+        {
+          "name": "name"
+        },
+        {
+          "name": "parent"
+        }
+      ],
+      [
+        {
+          "name": "description"
+        },
+        {
+          "name": "code"
+        }
+      ]
+    ]
+  }
+]

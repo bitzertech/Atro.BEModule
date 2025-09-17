@@ -10,7 +10,7 @@
     "is_legacy": { "type": "bool", "default": false, "label": "Legacy" },
     "best_number": { "type": "int", "required": true, "label": "Best Number" },
     "motors": { "type": "linkMultiple" },
-    "category": { "type": "link" },
+    "compressorCategory": { "type": "link" },
 
     "createdAt": { "type": "datetime", "readOnly": true },
     "modifiedAt": { "type": "datetime", "readOnly": true },
@@ -23,7 +23,7 @@
     "modifiedBy": { "type": "belongsTo", "entity": "User" },
 
     "motors": { "type": "manyMany", "entity": "Motor", "relationName": "compressorMotor"},
-    "category": { "type": "belongsTo", "entity": "Category" }
+    "compressorCategory": { "type": "belongsTo", "entity": "CompressorCategory" }
   },
   "collection": {
     "textFilterFields": ["name", "code"],

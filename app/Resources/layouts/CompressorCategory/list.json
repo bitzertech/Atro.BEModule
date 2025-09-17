@@ -1,0 +1,26 @@
+[
+  {
+    "name": "name",
+    "link": true
+  },
+  {
+    "name": "mainImage",
+    "notSortable": true
+  },
+  {
+    "name": "code"
+  },
+  {
+    "name": "categoryRouteName"
+  },
+  {
+    "name": "channels",
+    "notSortable": true
+  },
+  {
+    "name": "isActive"
+  },
+  {
+    "name": "popular"
+  }
+]

@@ -1,14 +1,9 @@
 {
   "fields": {
-    "motor": { "type": "link", "required": true },
     "compressor": { "type": "link", "required": true },
-
-    "current": {
-      "type": "float",
-      "required": false,
-      "precision": 10,
-      "scale": 2
-    },
+    "motor": { "type": "link", "required": true },
+    "compressorGeneration": { "type": "int", "required": true, "default": 0 },
+    "current": { "type": "float", "required": false, "precision": 10, "scale": 2 },
 
     "createdAt": { "type": "datetime", "readOnly": true },
     "modifiedAt": { "type": "datetime", "readOnly": true },

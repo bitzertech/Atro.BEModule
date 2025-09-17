@@ -1,0 +1,82 @@
+{
+  "confirm": {
+    "parents": "CompressorCategory.messages.categoryParentChangeConfirm"
+  },
+  "controller": "pim:controllers/record-tree",
+  "iconClass": "tree-view",
+  "boolFilterList": [
+    "onlyMy",
+    "notEntity",
+    "notLinkedWithCompressor",
+    "onlyRootCategory",
+    "notParents",
+    "notChildren",
+    "onlyLeafCategories",
+    "linkedWithCompressor"
+  ],
+  "hiddenBoolFilterList": [
+    "notEntity",
+    "notLinkedWithCompressor",
+    "onlyRootCategory",
+    "notParents",
+    "notChildren",
+    "onlyLeafCategories"
+  ],
+  "disabledMassActions": [
+    "merge"
+  ],
+  "views": {
+    "list": "views/list-tree",
+    "detail": "views/detail-tree"
+  },
+  "recordViews": {
+    "list": "pim:views/compressorCategory/record/list",
+    "detail": "views/record/detail-tree"
+  },
+    "files": {
+      "view": "pim:views/record/panels/files",
+      "rowActionsView": "pim:views/record/row-actions/relationship-file",
+      "dragDrop": {
+        "isActive": true,
+        "sortField": "category_file_mm.sorting"
+      },
+      "sortBy": "sorting",
+      "asc": true,
+      "selectAction": "selectRelatedEntity",
+      "selectBoolFilterList": [
+        "notEntity"
+      ]
+    },
+    "compressors": {
+      "create": false,
+      "selectAction": "selectRelatedEntity",
+      "selectBoolFilterList": [
+        "notEntity"
+      ],
+      "dragDrop": {
+        "isActive": true,
+        "maxSize": 20,
+        "sortField": "sorting"
+      },
+      "sortBy": "sorting",
+      "asc": true,
+    },
+    "parents": {
+      "selectAction": "selectRelatedEntity",
+      "selectBoolFilterList": [
+        "notChildren"
+      ]
+    },
+    "children": {
+      "selectAction": "selectRelatedEntity",
+      "selectBoolFilterList": [
+        "notParents"
+      ],
+      "dragDrop": {
+        "isActive": true,
+        "maxSize": 20,
+        "sortField": "sortOrder"
+      }
+    }
+  }
+}

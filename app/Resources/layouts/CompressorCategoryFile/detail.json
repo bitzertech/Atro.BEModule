@@ -1,0 +1,30 @@
+[
+  {
+    "label": "Details",
+    "style": "default",
+    "rows": [
+      [
+        {
+          "name": "category"
+        },
+        {
+          "name": "file"
+        }
+      ],
+      [
+        {
+          "name": "isMainImage"
+        },
+        {
+          "name": "sorting"
+        }
+      ],
+      [
+        {
+          "name": "tags"
+        },
+        false
+      ]
+    ]
+  }
+]

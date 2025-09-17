@@ -1,0 +1,24 @@
+[
+  {
+    "name": "name",
+    "link": true
+  },
+  {
+    "name": "channels"
+  },
+  {
+    "name": "code"
+  },
+  {
+    "name": "categoryRouteName"
+  },
+  {
+    "name": "isActive"
+  },
+  {
+    "name": "popular"
+  },
+  {
+    "name": "CompressorCategory__mainCategory"
+  }
+]

@@ -139,13 +139,7 @@
       "importDisabled": true,
       "exportDisabled": true
     },
-    "products": {
-      "type": "linkMultiple",
-      "layoutDetailDisabled": true,
-      "massUpdateDisabled": true,
-      "noLoad": true
-    },
-    "channels": {
+    "compressors": {
       "type": "linkMultiple",
       "layoutDetailDisabled": true,
       "massUpdateDisabled": true,
@@ -165,7 +159,7 @@
     "files": {
       "type": "hasMany",
       "relationName": "categoryFile",
-      "foreign": "categories",
+      "foreign": "compressorCategories",
       "entity": "File"
     },
     "createdBy": {
@@ -194,7 +188,7 @@
       "type": "hasMany",
       "relationName": "CategoryHierarchy",
       "foreign": "parents",
-      "entity": "Category",
+      "entity": "CompressorCategory",
       "midKeys": [
         "entityId",
         "parentId"
@@ -204,23 +198,17 @@
       "type": "hasMany",
       "relationName": "CategoryHierarchy",
       "foreign": "children",
-      "entity": "Category",
+      "entity": "CompressorCategory",
       "midKeys": [
         "parentId",
         "entityId"
       ]
     },
-    "products": {
+    "compressors": {
       "type": "hasMany",
-      "relationName": "productCategory",
-      "foreign": "categories",
-      "entity": "Product"
-    },
-    "channels": {
-      "type": "hasMany",
-      "relationName": "categoryChannel",
-      "foreign": "categories",
-      "entity": "Channel"
+      "relationName": "compressorCategory",
+      "foreign": "compressorCategories",
+      "entity": "Compressor"
     }
   },
   "collection": {

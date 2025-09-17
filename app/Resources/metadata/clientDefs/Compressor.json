@@ -1,4 +1,5 @@
 {
   "controller": "controllers/record",
-  "iconClass": "fas fa-cog"
+  "iconClass": "fas fa-cog",
+  "entity": true
 }
