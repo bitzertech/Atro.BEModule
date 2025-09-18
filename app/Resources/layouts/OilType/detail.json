@@ -1,0 +1,9 @@
+[
+  {
+    "label": "OilType",
+    "style": "default",
+    "rows": [
+        [ { "name": "name" }, { "name": "code" } ]
+    ]
+  }
+]

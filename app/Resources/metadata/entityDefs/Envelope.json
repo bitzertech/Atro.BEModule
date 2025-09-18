@@ -1,22 +1,17 @@
 {
   "type": "Base",
-  "name": "Motor",
-  "label": "Motor",
-  "label_plural": "Motors",
+  "name": "Envelope",
+  "label": "Envelope",
+  "label_plural": "Envelopes",
   "fields": {
     "code": { "type": "varchar", "required": true, "unique": true, "maxLength": 190 },
     "name": { "type": "varchar", "required": true, "maxLength": 190 },
-    "code_and_connection": { "type": "varchar", "required": true, "label": "Code + Connection" },
-    "voltage": { "type": "int", "label": "Voltage" },
-    "frequency": { "type": "int", "label": "Frequency" },
-    "spkz": { "type": "int", "label": "SPKZ" },
-    "motor_code": { "type": "varchar", "required": true, "label": "Motor Code" },
-
-    "voltage_range": { "type": "varchar", "maxLength": 30, "label": "Voltage Range" },
-    "connection": { "type": "varchar", "maxLength": 5, "label": "Connection" },
-
-    "voltage_frequence_factor": { "type": "float", "label": "Voltage Frequency Factor" },
-    "toggle_value": { "type": "int", "label": "Toggle Value" },
+    "number": { "type": "int", "required": true, "label": "Number" },
+    "envelope_type": { "type": "enum", "required": true, "prohibitedEmptyValue": true, "options": [ "none", "temperatue", "pressure" ], "label": "Envelope Type", "default": "temperature" },
+    "delta_t_to_fault": { "type": "float", "required": true, "label": "DeltaT to Fault" },
+    "delta_t_to_fault_zone7": { "type": "float", "required": true, "label": "DeltaT to Fault Zone 7" },
+    "delta_t_to_warning": { "type": "float", "required": true, "label": "DeltaT to Warning" },
+    "warning_reset": { "type": "float", "required": true, "label": "Warning Reset" },
 
     "createdAt": { "type": "datetime", "readOnly": true },
     "modifiedAt": { "type": "datetime", "readOnly": true },

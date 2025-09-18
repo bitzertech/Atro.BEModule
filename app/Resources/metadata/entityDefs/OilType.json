@@ -1,22 +1,12 @@
 {
   "type": "Base",
-  "name": "Motor",
-  "label": "Motor",
-  "label_plural": "Motors",
+  "name": "OilType",
+  "label": "Oil Type",
+  "label_plural": "Oil Types",
   "fields": {
     "code": { "type": "varchar", "required": true, "unique": true, "maxLength": 190 },
     "name": { "type": "varchar", "required": true, "maxLength": 190 },
-    "code_and_connection": { "type": "varchar", "required": true, "label": "Code + Connection" },
-    "voltage": { "type": "int", "label": "Voltage" },
-    "frequency": { "type": "int", "label": "Frequency" },
-    "spkz": { "type": "int", "label": "SPKZ" },
-    "motor_code": { "type": "varchar", "required": true, "label": "Motor Code" },
-
-    "voltage_range": { "type": "varchar", "maxLength": 30, "label": "Voltage Range" },
-    "connection": { "type": "varchar", "maxLength": 5, "label": "Connection" },
-
-    "voltage_frequence_factor": { "type": "float", "label": "Voltage Frequency Factor" },
-    "toggle_value": { "type": "int", "label": "Toggle Value" },
+    "number": { "type": "int", "required": true, "label": "Number" },
 
     "createdAt": { "type": "datetime", "readOnly": true },
     "modifiedAt": { "type": "datetime", "readOnly": true },
@@ -29,8 +19,8 @@
 
     "products": {
       "type": "manyMany",
-      "entity": "Product",
-      "relationName": "productMotor"
+      "entity": "ProductRefrigerantOilType",
+      "relationName": "productRefrigerantOilType"
     }
   },
   "collection": {

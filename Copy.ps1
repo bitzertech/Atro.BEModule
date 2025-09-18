@@ -32,5 +32,5 @@ if (Test-Path "$LOCAL\apply.sh") {
   scp "$LOCAL_UNIX/apply.sh" $REMOTE_SPEC
   ssh "$HOSTUSER@$HOSTNAME" "chmod +x $REMOTE_ROOT/apply.sh"
 }
-
+ssh "$HOSTUSER@$HOSTNAME" "$REMOTE_ROOT/apply.sh"
 Write-Host "Kopieret fra $LOCAL til $REMOTE_SPEC" -ForegroundColor Green

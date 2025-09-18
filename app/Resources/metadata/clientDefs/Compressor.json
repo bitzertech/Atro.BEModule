@@ -1,5 +1,0 @@
-{
-  "controller": "controllers/record",
-  "iconClass": "fas fa-cog",
-  "entity": true
-}

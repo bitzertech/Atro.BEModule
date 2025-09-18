@@ -1,0 +1,9 @@
+[
+  {
+    "label": "Reftrigerant",
+    "style": "default",
+    "rows": [
+        [ { "name": "name" }, { "name": "code" } ]
+    ]
+  }
+]

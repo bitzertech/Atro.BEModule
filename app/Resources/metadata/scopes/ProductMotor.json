@@ -1,0 +1,7 @@
+{
+  "entity": true,
+  "object": false,
+  "module": "BEModule",
+  "type": "Relation",
+  "collection": "productMotor"
+}

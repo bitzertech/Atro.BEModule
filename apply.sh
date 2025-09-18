@@ -15,6 +15,8 @@ if [ -f "$HOST_COMPOSER" ]; then
   echo "[i] Kopierer $HOST_COMPOSER til containeren som composer.json"
   exec_in "cd \"$APP_DIR\" && [ -f composer.json ] && cp composer.json composer.json.bak || true && cat > composer.json" < "$HOST_COMPOSER"
 fi
+# Sørg for at cache-mappen har de rigtige rettigheder/ejerskab
+exec_in "chown www-data:www-data -R \"$APP_DIR/data/cache\" && chmod -R 775 \"$APP_DIR/data/cache\" || true"
 
 # Vælg CLI entrypoint (foretræk console.php)
 CLI="console.php"
@@ -38,3 +40,4 @@ exec_in "cd \"$APP_DIR\" && php $CLI sql diff --run"
 
 # 4) (valgfrit) trig cron én gang
 exec_in "cd \"$APP_DIR\" && php $CLI cron || true"
+

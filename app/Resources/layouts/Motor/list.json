@@ -1,6 +1,5 @@
 [
   { "name": "name", "link": true, "width": "80" },
-  { "name": "code", "width": "140" },
   { "name": "motor_code", "width": "140" },
   { "name": "code_and_connection", "width": "220" },
   { "name": "voltage", "align": "right", "width": "100" },

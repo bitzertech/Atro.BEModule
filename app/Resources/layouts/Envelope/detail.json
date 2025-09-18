@@ -1,0 +1,7 @@
+{
+  "label": "Envelope",
+  "style": "default",
+  "rows": [
+    [ { "name": "name" }, { "name": "code" } ]
+  ]
+}
