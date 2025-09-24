@@ -1,4 +1,5 @@
 [
+  { "name": "number", "label": "Number" },
   { "name": "code", "label": "Code" },
   { "name": "name", "label": "Name" }
 ]

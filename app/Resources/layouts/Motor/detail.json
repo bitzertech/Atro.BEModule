@@ -8,7 +8,7 @@
         [ { "name": "voltage" }, { "name": "frequency" } ],
         [ { "name": "connection" }, { "name": "voltage_range" } ],
         [ { "name": "spkz" }, { "name": "toggle_value" } ],
-        [ { "name": "voltage_frequence_factor" } ]
+        [ { "name": "voltage_frequency_factor" } ]
     ]
   }
 ]

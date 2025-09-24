@@ -3,7 +3,18 @@
     "label": "Reftrigerant",
     "style": "default",
     "rows": [
-        [ { "name": "name" }, { "name": "code" } ]
+        [ { "name": "number" }, { "name": "name" } ],
+        [ { "name": "code" } ],
+        [ { "name": "critical_pr" }, { "name": "critical_temp" } ],
+        [ { "name": "pr_range_start" }, { "name": "pr_range_end" } ],
+        [ { "name": "dew_pr_change" }, { "name": "dew_temp_change" } ],
+        [ { "name": "dew_a1" }, { "name": "dew_b1" } ],
+        [ { "name": "dew_c1" }, { "name": "dew_a2" } ],
+        [ { "name": "dew_b2" }, { "name": "dew_c2" } ],
+        [ { "name": "bubble_pr_change" }, { "name": "bubble_temp_change" } ],
+        [ { "name": "bubble_a1" }, { "name": "bubble_b1" } ],
+        [ { "name": "bubble_c1" }, { "name": "bubble_a2" } ],
+        [ { "name": "bubble_b2" }, { "name": "bubble_c2" } ]
     ]
   }
 ]

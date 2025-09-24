@@ -12,6 +12,24 @@
     "delta_t_to_fault_zone7": { "type": "float", "required": true, "label": "DeltaT to Fault Zone 7" },
     "delta_t_to_warning": { "type": "float", "required": true, "label": "DeltaT to Warning" },
     "warning_reset": { "type": "float", "required": true, "label": "Warning Reset" },
+    "t0_1": { "type": "float", "required": true, "label": "T0[1]" },
+    "tc_1": { "type": "float", "required": true, "label": "TC[1]" },
+    "t0_2": { "type": "float", "required": true, "label": "T0[2]" },
+    "tc_2": { "type": "float", "required": true, "label": "TC[2]" },
+    "t0_3": { "type": "float", "required": true, "label": "T0[3]" },
+    "tc_3": { "type": "float", "required": true, "label": "TC[3]" },
+    "t0_4": { "type": "float", "required": false, "label": "T0[4]" },
+    "tc_4": { "type": "float", "required": false, "label": "TC[4]" },
+    "t0_5": { "type": "float", "required": false, "label": "T0[5]" },
+    "tc_5": { "type": "float", "required": false, "label": "TC[5]" },
+    "t0_6": { "type": "float", "required": false, "label": "T0[6]" },   
+    "tc_6": { "type": "float", "required": false, "label": "TC[6]" },
+    "t0_7": { "type": "float", "required": false, "label": "T0[7]" },
+    "tc_7": { "type": "float", "required": false, "label": "TC[7]" },
+    "t0_8": { "type": "float", "required": false, "label": "T0[8]" },
+    "tc_8": { "type": "float", "required": false, "label": "TC[8]" },
+    "t0_9": { "type": "float", "required": false, "label": "T0[9]" },
+    "tc_9": { "type": "float", "required": false, "label": "TC[9]" },
 
     "createdAt": { "type": "datetime", "readOnly": true },
     "modifiedAt": { "type": "datetime", "readOnly": true },
@@ -20,13 +38,7 @@
   },
   "links": {
     "createdBy": { "type": "belongsTo", "entity": "User" },
-    "modifiedBy": { "type": "belongsTo", "entity": "User" },
-
-    "products": {
-      "type": "manyMany",
-      "entity": "Product",
-      "relationName": "productMotor"
-    }
+    "modifiedBy": { "type": "belongsTo", "entity": "User" }
   },
   "collection": {
     "textFilterFields": ["name", "code"],

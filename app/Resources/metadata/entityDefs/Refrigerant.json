@@ -8,7 +8,7 @@
     "name": { "type": "varchar", "required": true, "maxLength": 190 },
     
     "number": { "type": "int", "required": true, "label": "Number" },
-    "crictical_pr": { "type": "float", "required": true, "label": "Critical Pressure" },
+    "critical_pr": { "type": "float", "required": true, "label": "Critical Pressure" },
     "critical_temp": { "type": "float", "required": true, "label": "Critical Temperature" },
     "pr_range_start": { "type": "float", "required": true, "label": "Pressure Range Start" },
     "pr_range_end": { "type": "float", "required": true, "label": "Pressure Range End" },

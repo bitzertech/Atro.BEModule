@@ -2,7 +2,6 @@
   "fields": {
     "product": { "type": "link", "required": true },
     "motor": { "type": "link", "required": true },
-    "productGeneration": { "type": "int", "required": true, "default": 0, "label": "Generation" },
     "current": { "type": "float", "required": false, "precision": 10, "scale": 2, "label": "Current (A)" },
 
     "createdAt": { "type": "datetime", "readOnly": true },
@@ -25,7 +24,7 @@
   "indexes": {
     "pairUnique": {
       "unique": true,
-      "columns": ["motorId", "productId", "productGeneration", "deleted"]
+      "columns": ["motorId", "productId", "deleted"]
     },
     "createdAt": { "columns": ["createdAt"] }
   }

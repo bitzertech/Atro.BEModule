@@ -1,7 +1,7 @@
 {
   "entity": true,
-  "object": true,
+  "object": false,
   "module": "BEModule",
-  "type": "Base",
+  "type": "Relation",
   "collection": "ProductRefrigerantOilType"
 }

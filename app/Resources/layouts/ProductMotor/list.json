@@ -1,0 +1,5 @@
+[
+  { "name": "product", "label": "Product" },
+  { "name": "motor", "label": "Motor" },
+  { "name": "current", "label": "Current" }
+]

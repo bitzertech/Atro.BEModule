@@ -4,7 +4,7 @@
     "style": "default",
     "rows": [
         [ { "name": "motor" }, { "name": "product" } ],
-        [ { "name": "productGeneration" }, { "name": "current" } ]
+        [ { "name": "current" } ]
     ]
   }
 ]

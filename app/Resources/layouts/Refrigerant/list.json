@@ -1,4 +1,5 @@
 [
-  { "name": "code", "label": "Code" },
-  { "name": "name", "label": "Name" }
+  { "name": "name", "label": "Name" },
+  { "name": "number", "label": "Number" },
+  { "name": "code", "label": "Code" }
 ]

@@ -15,7 +15,7 @@
     "voltage_range": { "type": "varchar", "maxLength": 30, "label": "Voltage Range" },
     "connection": { "type": "varchar", "maxLength": 5, "label": "Connection" },
 
-    "voltage_frequence_factor": { "type": "float", "label": "Voltage Frequency Factor" },
+    "voltage_frequency_factor": { "type": "float", "label": "Voltage Frequency Factor" },
     "toggle_value": { "type": "int", "label": "Toggle Value" },
 
     "createdAt": { "type": "datetime", "readOnly": true },
