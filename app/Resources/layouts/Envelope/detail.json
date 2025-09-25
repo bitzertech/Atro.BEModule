@@ -1,7 +1,28 @@
-{
-  "label": "Envelope",
-  "style": "default",
-  "rows": [
-    [ { "name": "name" }, { "name": "code" } ]
-  ]
-}
+[
+  {
+    "label": "Details",
+    "style": "default",
+    "rows": [
+      [ { "name": "name" }, { "name": "code" } ],
+      [ { "name": "number" }, { "name": "envelope_type" } ],
+      [ { "name": "delta_t_to_fault" }, { "name": "delta_t_to_fault_zone7" } ],
+      [ { "name": "delta_t_to_warning" }, { "name": "warning_reset" } ],
+      [ { "name": "description", "colSpan": 2 } ]
+    ]
+  },
+  {
+    "label": "Envelope Points",
+    "style": "default",
+    "rows": [
+      [ { "name": "t0_1" }, { "name": "tc_1" } ],
+      [ { "name": "t0_2" }, { "name": "tc_2" } ],
+      [ { "name": "t0_3" }, { "name": "tc_3" } ],
+      [ { "name": "t0_4" }, { "name": "tc_4" } ],
+      [ { "name": "t0_5" }, { "name": "tc_5" } ],
+      [ { "name": "t0_6" }, { "name": "tc_6" } ],
+      [ { "name": "t0_7" }, { "name": "tc_7" } ],
+      [ { "name": "t0_8" }, { "name": "tc_8" } ],
+      [ { "name": "t0_9" }, { "name": "tc_9" } ]
+    ]
+  }
+]

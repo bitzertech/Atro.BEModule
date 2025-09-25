@@ -11,7 +11,7 @@
         "atrocore/import": ">=1.9.20",
         "atrocore/import-http": ">=1.5.3",
         "atrocore/advanced-data-types": ">=1.2.5",
-        "bitzertech/atro-bemodule": "dev-main"
+        "bitzertech/atro-bemodule": "dev-master"
     },
     "repositories": [
         {

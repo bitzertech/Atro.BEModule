@@ -1,0 +1,56 @@
+{
+  "labels": {
+    "Envelope": "Envelope",
+    "Envelopes": "Envelopes",
+    "Create Envelope": "Create Envelope",
+    "Edit Envelope": "Edit Envelope",
+    "Duplicate Envelope": "Duplicate Envelope",
+    "Delete Envelope": "Delete Envelope",
+    "Details": "Details",
+    "Envelope Points": "Envelope Points"
+  },
+  "fields": {
+    "code": "Code",
+    "name": "Name",
+    "description": "Description",
+    "number": "Number",
+    "envelope_type": "Envelope Type",
+    "delta_t_to_fault": "DeltaT to Fault",
+    "delta_t_to_fault_zone7": "DeltaT to Fault Zone 7",
+    "delta_t_to_warning": "DeltaT to Warning",
+    "warning_reset": "Warning Reset",
+    "t0_1": "T0[1]",
+    "tc_1": "TC[1]",
+    "t0_2": "T0[2]",
+    "tc_2": "TC[2]",
+    "t0_3": "T0[3]",
+    "tc_3": "TC[3]",
+    "t0_4": "T0[4]",
+    "tc_4": "TC[4]",
+    "t0_5": "T0[5]",
+    "tc_5": "TC[5]",
+    "t0_6": "T0[6]",
+    "tc_6": "TC[6]",
+    "t0_7": "T0[7]",
+    "tc_7": "TC[7]",
+    "t0_8": "T0[8]",
+    "tc_8": "TC[8]",
+    "t0_9": "T0[9]",
+    "tc_9": "TC[9]",
+    "createdAt": "Created At",
+    "modifiedAt": "Modified At",
+    "createdBy": "Created By",
+    "modifiedBy": "Modified By"
+  },
+  "links": {
+    "createdBy": "Created By",
+    "modifiedBy": "Modified By"
+  },
+  "options": {
+    "envelope_type": {
+      "none": "None",
+      "temperature": "Temperature",
+      "pressure": "Pressure"
+    }
+  }
+}

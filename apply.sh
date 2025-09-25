@@ -8,7 +8,7 @@ WEB=atropim-web-1
 HOST_MODULE="${HOST_MODULE:-$HOME/dev/Atro.BEModule}"
 HOST_COMPOSER="$HOST_MODULE/atro_composer.json"
 
-exec_in() { docker exec -i "$WEB" sh -lc "$1"; }
+exec_in() { docker exec -u www-data -i "$WEB" sh -lc "$1"; }
 
 # [NYT] 0) Kopiér atro_composer.json ind som composer.json (hvis findes)
 if [ -f "$HOST_COMPOSER" ]; then
