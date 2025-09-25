@@ -1,0 +1,5 @@
+[
+  { "name": "name", "link": true },
+  { "name": "current", "label": "Current (A)" },
+  { "name": "isActive" }
+]
