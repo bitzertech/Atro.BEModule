@@ -35,7 +35,13 @@
     "createdAt": { "type": "datetime", "readOnly": true },
     "modifiedAt": { "type": "datetime", "readOnly": true },
     "createdBy": { "type": "link", "readOnly": true, "view": "views/fields/user" },
-    "modifiedBy": { "type": "link", "readOnly": true, "view": "views/fields/user" }
+    "modifiedBy": { "type": "link", "readOnly": true, "view": "views/fields/user" },
+    "envelope_polygon": {
+      "type": "base",
+      "readOnly": true,
+      "label": "Envelope Polygon",
+      "view": "atro-bemodule:views/fields/envelope-polygon"    
+    }
   },
   "links": {
     "createdBy": { "type": "belongsTo", "entity": "User" },

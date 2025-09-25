@@ -37,20 +37,6 @@
     "tc_8": "TC[8]",
     "t0_9": "T0[9]",
     "tc_9": "TC[9]",
-    "createdAt": "Created At",
-    "modifiedAt": "Modified At",
-    "createdBy": "Created By",
-    "modifiedBy": "Modified By"
-  },
-  "links": {
-    "createdBy": "Created By",
-    "modifiedBy": "Modified By"
-  },
-  "options": {
-    "envelope_type": {
-      "none": "None",
-      "temperature": "Temperature",
-      "pressure": "Pressure"
-    }
+    "envelope_polygon": "Envelope Polygon"
   }
 }

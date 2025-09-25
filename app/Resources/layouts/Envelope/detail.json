@@ -7,7 +7,8 @@
       [ { "name": "number" }, { "name": "envelope_type" } ],
       [ { "name": "delta_t_to_fault" }, { "name": "delta_t_to_fault_zone7" } ],
       [ { "name": "delta_t_to_warning" }, { "name": "warning_reset" } ],
-      [ { "name": "description", "colSpan": 2 } ]
+      [ { "name": "description", "colSpan": 2 } ],
+      [ { "name": "envelope_polygon", "fullWidth": true } ]
     ]
   },
   {
