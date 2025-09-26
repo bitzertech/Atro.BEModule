@@ -3,5 +3,6 @@
   "object": true,
   "module": "BEModule",
   "type": "Base",
-  "collection": "Envelope"
+  "collection": "Envelope",
+  "tab": true
 }

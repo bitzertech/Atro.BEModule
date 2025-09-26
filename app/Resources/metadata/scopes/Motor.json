@@ -3,5 +3,6 @@
   "object": true,
   "module": "BEModule",
   "type": "Base",
-  "collection": "Motor"
+  "collection": "Motor",
+  "tab": true
 }

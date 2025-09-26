@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Envelope Polygon Tester</title>
+<style>
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; margin: 20px; color: #222; }
+  h1 { font-size: 18px; margin: 0 0 10px; }
+  .wrap { display: grid; grid-template-columns: 380px 1fr; gap: 18px; align-items: start; }
+  fieldset { border: 1px solid #ddd; border-radius: 10px; padding: 12px; }
+  legend { padding: 0 6px; color: #555; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td { padding: 4px 6px; text-align: left; }
+  th { color: #666; font-weight: 600; }
+  input[type="number"] { width: 94px; padding: 4px 6px; }
+  .controls { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+  button { padding: 6px 10px; border-radius: 8px; border: 1px solid #bbb; background: #f7f7f8; cursor: pointer; }
+  button:hover { background: #f1f1f2; }
+  label { user-select: none; }
+  .opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 12px; margin-top: 8px; }
+  .opts .row { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+  .row-inline { display:flex; gap:10px; align-items:center; margin:8px 0; flex-wrap: wrap; }
+  select { padding: 4px 8px; }
+  .canvas-wrap { width: min(100%, 900px); }
+  svg { width: 100%; height: 420px; border: 1px solid #ddd; border-radius: 12px; background: #fff; display:block; }
+  .muted { color: #888; }
+  .note { font-size: 12px; color: #666; margin-top: 8px; }
+</style>
+</head>
+<body>
+<h1>Envelope Polygon Tester</h1>
+
+<div class="wrap">
+  <fieldset>
+    <legend>Points (T0, Tc)</legend>
+
+    <div class="row-inline">
+      <label for="envType">Envelope type:</label>
+      <select id="envType">
+        <option value="temperature" selected>temperature (°C)</option>
+        <option value="pressure">pressure (bar)</option>
+        <option value="none">none (unitless)</option>
+      </select>
+      <label class="muted">Padding %</label>
+      <input id="padPct" type="number" step="1" min="0" max="40" value="10">
+    </div>
+
+    <table>
+      <thead><tr><th>#</th><th>T0 (x)</th><th>Tc (y)</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+
+    <div class="controls">
+      <button id="btnDraw">Draw</button>
+      <button id="btnClear">Clear</button>
+      <button id="btnSample">Sample</button>
+      <button id="btnRandom">Random</button>
+    </div>
+
+    <div class="opts">
+      <div class="row"><input id="optHull" type="checkbox" checked><label for="optHull">Use convex hull</label></div>
+      <div class="row"><input id="optMarkers" type="checkbox" checked><label for="optMarkers">Show markers</label></div>
+      <div class="row"><input id="optGrid" type="checkbox"><label for="optGrid">Grid lines</label></div>
+      <div class="row"><label class="muted">Max points</label><input id="maxPts" type="number" step="1" min="1" max="32" value="9"></div>
+    </div>
+  </fieldset>
+
+  <div class="canvas-wrap">
+    <svg id="svg" viewBox="0 0 900 420" preserveAspectRatio="none" aria-label="Envelope polygon chart"></svg>
+    <div class="note">Convex hull + ens X/Y-skala. Akse-titler viser enheder ud fra envelope type.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // --- Konstanter til layout/ticks ---
+  const PAD_FRAME  = 10;
+  const PAD_LEFT   = 58;   // plads til Y-etiketter + titel
+  const PAD_RIGHT  = 16;
+  const PAD_TOP    = 18;
+  const PAD_BOTTOM = 40;   // plads til X-etiketter + titel
+
+  const TARGET_TICKS = 8;
+  const TICK_SIZE    = 5;   // længde på tick-streger
+  const X_TICK_GAP   = 8;   // afstand fra akse til x-tick labels
+  const X_TITLE_GAP  = 26;  // afstand fra akse til x-titel
+  const DEFAULT_MARGIN_FRAC = 0.10; // 10% data-margin før equalize
+
+  // --- DOM refs ---
+  const svg      = document.getElementById('svg');
+  const rowsEl   = document.getElementById('rows');
+  const envType  = document.getElementById('envType');
+  const optHull  = document.getElementById('optHull');
+  const optGrid  = document.getElementById('optGrid');
+  const optMarkers = document.getElementById('optMarkers');
+  const padPct   = document.getElementById('padPct');
+  const maxPts   = document.getElementById('maxPts');
+
+  // --- Hjælpere ---
+  function debounce(fn, ms){ let t=null; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), ms); }; }
+  function make(name, attrs){ const el=document.createElementNS('http://www.w3.org/2000/svg', name); for (const k in attrs) el.setAttribute(k, attrs[k]); return el; }
+  function niceStep(range, target=TARGET_TICKS){
+    if (!isFinite(range) || range <= 0) return 1;
+    const rough = range / target;
+    const pow = Math.pow(10, Math.floor(Math.log10(rough)));
+    const f = rough / pow;
+    const nf = f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10;
+    return nf * pow;
+  }
+  function convexHull(points){
+    if (points.length <= 3) return points.slice();
+    const pts = points.slice().sort((a,b)=>a.x===b.x? a.y-b.y : a.x-b.x);
+    const cross = (o,a,b) => (a.x-o.x)*(b.y-o.y) - (a.y-o.y)*(b.x-o.x);
+    const lower=[]; for (const p of pts){ while (lower.length>=2 && cross(lower.at(-2), lower.at(-1), p) <= 0) lower.pop(); lower.push(p); }
+    const upper=[]; for (let i=pts.length-1;i>=0;i--){ const p=pts[i]; while (upper.length>=2 && cross(upper.at(-2), upper.at(-1), p) <= 0) upper.pop(); upper.push(p); }
+    upper.pop(); lower.pop(); return lower.concat(upper);
+  }
+
+  // --- UI builder ---
+  function buildRows(n=9){
+    rowsEl.innerHTML = '';
+    for (let i=1;i<=n;i++){
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td class="muted">'+i+'</td>' +
+        '<td><input type="number" step="any" class="t0"></td>' +
+        '<td><input type="number" step="any" class="tc"></td>';
+      rowsEl.appendChild(tr);
+    }
+  }
+  buildRows();
+
+  function getPairs(){
+    const a = rowsEl.querySelectorAll('.t0');
+    const b = rowsEl.querySelectorAll('.tc');
+    const pts=[];
+    for (let i=0;i<a.length;i++){
+      const x=a[i].value.trim(), y=b[i].value.trim();
+      if (x!=='' && y!==''){
+        const nx=Number(x), ny=Number(y);
+        if (!Number.isNaN(nx) && !Number.isNaN(ny)) pts.push({x:nx,y:ny});
+      }
+    }
+    return pts.slice(0, Math.max(1, Number(maxPts.value||9)));
+  }
+
+  // --- Tegn ---
+  function draw(){
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+    const raw = getPairs();
+    if (!raw.length){
+      svg.appendChild(make('text',{x:10,y:20,fill:'#666'})).textContent='No points';
+      return;
+    }
+
+    const unit = envType.value==='pressure' ? 'bar' : (envType.value==='temperature' ? '°C' : '');
+    const xLabel = unit ? `T0 (${unit})` : 'T0';
+    const yLabel = unit ? `TC (${unit})` : 'TC';
+
+    // polygon-punkter (hull eller rå)
+    const hull = optHull.checked ? convexHull(raw) : raw.slice();
+
+    // Ekstremer
+    let xs = hull.map(p=>p.x), ys = hull.map(p=>p.y);
+    let minX=Math.min(...xs), maxX=Math.max(...xs);
+    let minY=Math.min(...ys), maxY=Math.max(...ys);
+    if (minX===maxX){ minX-=1; maxX+=1; }
+    if (minY===maxY){ minY-=1; maxY+=1; }
+
+    // data-margin
+    const padFrac = Number(padPct.value||10)/100;
+    const mx=(maxX-minX)*padFrac, my=(maxY-minY)*padFrac;
+    minX-=mx; maxX+=mx; minY-=my; maxY+=my;
+
+    // Canvas + indre tegnefelt (afsat plads til akser/labels/titel)
+    const VBW = svg.viewBox.baseVal.width  || svg.clientWidth  || 900;
+    const VBH = svg.viewBox.baseVal.height || svg.clientHeight || 420;
+    const innerLeft   = PAD_LEFT + PAD_FRAME;
+    const innerRight  = VBW - (PAD_RIGHT + PAD_FRAME);
+    const innerTop    = PAD_TOP + PAD_FRAME;
+    const innerBottom = VBH - (PAD_BOTTOM + PAD_FRAME);
+    const W = Math.max(1, innerRight - innerLeft);
+    const H = Math.max(1, innerBottom - innerTop);
+
+    // Ens skala: find fælles S og udvid den korte akse
+    const rx=maxX-minX, ry=maxY-minY;
+    const S = Math.min(W/rx, H/ry);
+    const needRx = W/S, needRy = H/S;
+    const cx=(minX+maxX)/2, cy=(minY+maxY)/2;
+    minX = cx - needRx/2; maxX = cx + needRx/2;
+    minY = cy - needRy/2; maxY = cy + needRy/2;
+
+    const sx = x => innerLeft + (x - minX) * S;
+    const sy = y => innerBottom - (y - minY) * S;
+
+    // Grid
+    if (optGrid.checked){
+      const gx = niceStep(maxX-minX), gy = niceStep(maxY-minY);
+      const g = make('g', {stroke:'#eee'});
+      for (let x=Math.ceil(minX/gx)*gx; x<=maxX+1e-9; x+=gx)
+        g.appendChild(make('line',{x1:sx(x), y1:sy(minY), x2:sx(x), y2:sy(maxY)}));
+      for (let y=Math.ceil(minY/gy)*gy; y<=maxY+1e-9; y+=gy)
+        g.appendChild(make('line',{x1:sx(minX), y1:sy(y), x2:sx(maxX), y2:sy(y)}));
+      svg.appendChild(g);
+    }
+
+    // Akser
+    svg.appendChild(make('line',{x1:innerLeft,y1:innerBottom,x2:innerRight,y2:innerBottom,stroke:'#aaa'}));
+    svg.appendChild(make('line',{x1:innerLeft,y1:innerTop,   x2:innerLeft,  y2:innerBottom,stroke:'#aaa'}));
+
+    // Ticks + labels (x bundet til akse-y)
+    const stepX = niceStep(maxX-minX), stepY = niceStep(maxY-minY);
+
+    for (let x=Math.ceil(minX/stepX)*stepX; x<=maxX+1e-9; x+=stepX){
+      const X=sx(x);
+      svg.appendChild(make('line',{x1:X,y1:innerBottom,x2:X,y2:innerBottom+TICK_SIZE,stroke:'#888'}));
+      const t=make('text',{
+        x:X,
+        y:innerBottom + TICK_SIZE + X_TICK_GAP,
+        'text-anchor':'middle','font-size':'11', fill:'#555'
+      });
+      t.textContent=(+x.toFixed(2));
+      svg.appendChild(t);
+    }
+
+    for (let y=Math.ceil(minY/stepY)*stepY; y<=maxY+1e-9; y+=stepY){
+      const Y=sy(y);
+      svg.appendChild(make('line',{x1:innerLeft-TICK_SIZE,y1:Y,x2:innerLeft,y2:Y,stroke:'#888'}));
+      const t=make('text',{x:innerLeft-(TICK_SIZE+3), y:Y+4, 'text-anchor':'end','font-size':'11', fill:'#555'});
+      t.textContent=(+y.toFixed(2));
+      svg.appendChild(t);
+    }
+
+    // Akse-TITLER (placeret relativt til akserne)
+    const xTitle = make('text',{
+      x:(innerLeft+innerRight)/2,
+      y:innerBottom + X_TITLE_GAP,
+      'text-anchor':'middle','font-size':'12', fill:'#333'
+    }); xTitle.textContent = xLabel; svg.appendChild(xTitle);
+
+    const yTitle = make('text',{
+      x:12, y:(innerTop+innerBottom)/2,
+      'text-anchor':'middle','font-size':'12', fill:'#333',
+      transform:`rotate(-90 12 ${(innerTop+innerBottom)/2})`
+    }); yTitle.textContent = yLabel; svg.appendChild(yTitle);
+
+    // Polygon + markers
+    const polyPts = hull.map(p=>`${sx(p.x)},${sy(p.y)}`).join(' ');
+    svg.appendChild(make('polygon',{points: polyPts, fill:'rgba(11,108,255,0.15)', stroke:'#0b6cff', 'stroke-width':'2'}));
+    if (optMarkers.checked){
+      hull.forEach(p => svg.appendChild(make('circle',{cx:sx(p.x), cy:sy(p.y), r:3, fill:'#0b6cff'})));
+    }
+  }
+
+  // --- Handlers ---
+  document.getElementById('btnDraw').addEventListener('click', draw);
+  document.getElementById('btnClear').addEventListener('click', ()=>{ rowsEl.querySelectorAll('input').forEach(i=>i.value=''); draw(); });
+  document.getElementById('btnSample').addEventListener('click', ()=>{
+    // Sample i °C
+    const t0=[0,5,10,15,20,25,30,40,50], tc=[0,8,15,19,22,24,26,28,29];
+    const a=rowsEl.querySelectorAll('.t0'), b=rowsEl.querySelectorAll('.tc');
+    for (let i=0;i<a.length;i++){ a[i].value=t0[i]??''; b[i].value=tc[i]??''; }
+    envType.value='temperature';
+    draw();
+  });
+  document.getElementById('btnRandom').addEventListener('click', ()=>{
+    const n=Math.min(Number(maxPts.value||9), 20);
+    const t0=[], tc=[]; let x=0;
+    for (let i=0;i<n;i++){ x+=Math.random()*6; t0.push(+x.toFixed(1)); tc.push(+(Math.random()*30).toFixed(1)); }
+    const a=rowsEl.querySelectorAll('.t0'), b=rowsEl.querySelectorAll('.tc');
+    for (let i=0;i<a.length;i++){ a[i].value=t0[i]??''; b[i].value=tc[i]??''; }
+    draw();
+  });
+
+  ['change','input'].forEach(ev=>{
+    rowsEl.addEventListener(ev, e=>{ if (e.target.matches('input')) draw(); });
+    [envType,optHull,optGrid,optMarkers,padPct,maxPts].forEach(el=>el.addEventListener(ev, draw));
+  });
+
+  // re-render på vindues-resize (så SVG følger faktisk bredde)
+  window.addEventListener('resize', debounce(draw, 120));
+
+  // første tegning
+  draw();
+})();
+</script>
+</body>
+</html>
