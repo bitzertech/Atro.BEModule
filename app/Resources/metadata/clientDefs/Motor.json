@@ -1,5 +1,12 @@
 {
   "controller": "controllers/record",
   "iconClass": "fas fa-cog",
-  "entity": true
+  "entity": true,
+  "relationshipPanels": {
+    "products": {
+      "select": true,
+      "create": true
+    }
+  }
+
 }

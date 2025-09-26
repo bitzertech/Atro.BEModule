@@ -1,0 +1,9 @@
+{
+  "columns": [
+    "name",
+    "productMotors.current",
+    "createdAt"
+  ],
+  "sortBy": "name",
+  "asc": true
+}
